@@ -7,8 +7,8 @@ let shadowShader;
 
 function preload() {
   shadowShader = loadShader(
-    "/shaders/vertex_shader.glsl",
-    "/shaders/frac_shader.glsl"
+    "./shaders/vertex_shader.glsl",
+    "./shaders/frac_shader.glsl"
   );
 }
 
