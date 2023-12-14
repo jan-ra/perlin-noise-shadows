@@ -28,6 +28,9 @@ function setup() {
 }
 
 function draw() {
+  sun.x = mouseX / width;
+  sun.y = mouseY / height;
+
   shadowShader.setUniform("colour", cMap);
   shadowShader.setUniform("height", hMap);
   shadowShader.setUniform("sunPos", [sun.x, sun.y, sun.z]);
@@ -36,6 +39,13 @@ function draw() {
   screenMap.rect(0, 0, width / tileSize, height / tileSize);
 
   image(screenMap, 0, 0, width, height);
+  showSun();
+}
+
+function showSun() {
+  fill(255, 200, 0);
+  noStroke();
+  circle(sun.x * width, sun.y * width, sun.z * 20);
 }
 
 function genTerrain() {
