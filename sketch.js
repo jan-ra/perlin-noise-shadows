@@ -1,11 +1,18 @@
-var tileSize = 20;
-var scl = 0.1;
+let tileSize = 1;
+let scl = 0.02;
+let wlevel = 0.3;
 
 function setup() {
-  createCanvas(1080, 720);
+  createCanvas(600, 600);
   noSmooth();
   noStroke();
 
+  genTerrain();
+}
+
+function draw() {}
+
+function genTerrain() {
   for (var i = 0; i < width / tileSize; i++) {
     for (var j = 0; j < height / tileSize; j++) {
       fill(calcColor(i, j));
@@ -14,10 +21,9 @@ function setup() {
   }
 }
 
-function draw() {}
-
 function calcColor(x, y) {
-  const v = noise(x * scl, y * scl);
+  const v = calcNoise(x, y);
+
   if (v < 0.3) {
     return color("#62A6A9");
   } else if (v < 0.4) {
@@ -35,4 +41,22 @@ function calcColor(x, y) {
   } else {
     return color("#D2E0DE");
   }
+}
+
+function calcNoise(x, y) {
+  let v = noise(x * scl, y * scl);
+  v *= islandModifier(x, y);
+  return max(wlevel, v);
+}
+
+function islandModifier(x, y) {
+  let maxDist = min(width / tileSize, height / tileSize);
+  maxDist = (maxDist / 2) * (maxDist / 2);
+
+  const dx = width / tileSize / 2 - x;
+  const dy = height / tileSize / 2 - y;
+
+  const dSq = dx * dx + dy * dy;
+
+  return map(dSq, 0, maxDist, 1, 0);
 }
