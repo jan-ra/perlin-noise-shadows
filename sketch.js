@@ -1,5 +1,5 @@
 let tileSize = 1;
-let scl = 0.02;
+let scl = 0.01;
 let wlevel = 0.3;
 
 function setup() {
@@ -24,19 +24,19 @@ function genTerrain() {
 function calcColor(x, y) {
   const v = calcNoise(x, y);
 
-  if (v < 0.3) {
+  if (v <= 0.3) {
     return color("#62A6A9");
-  } else if (v < 0.4) {
+  } else if (v <= 0.4) {
     return color("#D6B69E");
-  } else if (v < 0.5) {
+  } else if (v <= 0.5) {
     return color("#98AD5A");
-  } else if (v < 0.6) {
+  } else if (v <= 0.6) {
     return color("#658541");
-  } else if (v < 0.7) {
+  } else if (v <= 0.7) {
     return color("#477645");
-  } else if (v < 0.8) {
+  } else if (v <= 0.8) {
     return color("#6D7687");
-  } else if (v < 0.9) {
+  } else if (v <= 0.9) {
     return color("#848D9A");
   } else {
     return color("#D2E0DE");
